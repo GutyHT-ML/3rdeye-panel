@@ -1,0 +1,27 @@
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="signUp()" style="display: block;" autocomplete="off">
+    <div class="form-container">
+      <div class="mat-title" style="text-align: center;">Sign Up</div>
+      <mat-form-field appearance="outline" color="accent">
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="Ex. Alexferloz" formControlName="username" required>
+        <mat-error *ngIf="form.controls['username'].invalid"></mat-error>
+      </mat-form-field>
+        <mat-form-field appearance="outline" color="accent">
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Ex. guty@example.com" formControlName="email" required email>
+          <mat-error *ngIf="form.controls['email'].invalid"></mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" color="accent">
+          <mat-label>Enter your password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
+          <mat-error *ngIf="form.controls['password'].invalid"></mat-error>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+        </mat-form-field>
+        <button mat-raised-button color="accent" type="submit">Sign Up</button>
+        <p>Already have an account? <a routerLink="/login" routerLinkActive="active">Log in</a></p>
+    </div>
+  </form>
+</div>
