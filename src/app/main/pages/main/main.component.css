@@ -1,0 +1,45 @@
+.post-card {
+  max-width: 450px;
+  margin: auto;
+  border-style: solid;
+  border-color: rgb(210,218,75);
+  margin-bottom: 1em;
+}
+
+
+.mat-divider{
+  border-top-width: 3px;
+  border-top-color:rgb(210,218,75);
+  border-top-style: dashed;
+}
+
+.content{
+  margin-bottom: 35px;
+}
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.example-container {
+  background-color: rgba(133, 133, 133, 0.5);
+  border: 5px solid rgb(0, 0, 0);
+}
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.example-sidenav {
+  background-color: rgba(133, 133, 133, 0.75);
+  padding: 20px;
+}

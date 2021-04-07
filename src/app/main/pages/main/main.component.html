@@ -1,0 +1,35 @@
+<div>
+  <mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side" [(opened)]="isToggled">
+      <mat-selection-list #routes [multiple]="false">
+        <mat-list-option *ngFor="let option of tabs" [value]="option.route"
+         routerLink="/{{option.route}}">
+          {{option.title}}
+        </mat-list-option>
+      </mat-selection-list>
+    </mat-drawer>
+    <div class="example-sidenav-content">
+      <button type="button" mat-button (click)="drawer.toggle()">
+        <span class="material-icons" *ngIf="!isToggled">
+          arrow_forward_ios
+        </span>
+        <span class="material-icons" *ngIf="isToggled">
+          arrow_back_ios
+        </span>
+      </button>
+    </div>
+    <div>
+      <mat-card class="post-card">
+        <mat-card-title>Start a new discussion</mat-card-title>
+      </mat-card>
+      <mat-card class="post-card">
+        <mat-list>
+          <mat-list-item>
+            <p style="text-align: end;">This is the end of the feed!</p>
+          </mat-list-item>
+        </mat-list>
+      </mat-card>
+    </div>
+  
+  </mat-drawer-container>
+</div>
