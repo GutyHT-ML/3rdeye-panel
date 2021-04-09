@@ -4,9 +4,14 @@ import { ReactiveFormsModule } from "@angular/forms";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+  HttpClient
+} from '@angular/common/http';
 import { SharedModule } from "./shared/modules/shared.module";
 import { PagenotfoundComponent } from './shared/components/pagenotfound/pagenotfound.component';
+import { AuthInterceptor } from './auth/services/auth.interceptor';
 @NgModule({
   declarations: [			
     AppComponent, PagenotfoundComponent,
@@ -19,7 +24,9 @@ import { PagenotfoundComponent } from './shared/components/pagenotfound/pagenotf
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
