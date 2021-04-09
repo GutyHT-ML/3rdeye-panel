@@ -5,7 +5,9 @@ import { MainComponent } from './pages/main/main.component';
 const routes: Routes = [
   {
     path: '', component: MainComponent,
-    children: [],
+    children: [
+      { path: 'views', loadChildren: () => import('./pages/views/views.module').then(m => m.ViewsModule) },
+    ],
     canActivate: []
   }
 ];

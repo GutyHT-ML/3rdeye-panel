@@ -1,3 +1,6 @@
+.container {
+  padding: 3em;
+}
 .post-card {
   max-width: 450px;
   margin: auto;
@@ -29,7 +32,6 @@
 
 .example-container {
   background-color: rgba(133, 133, 133, 0.5);
-  border: 5px solid rgb(0, 0, 0);
 }
 
 .example-sidenav-content {
@@ -40,6 +42,6 @@
 }
 
 .example-sidenav {
-  background-color: rgba(133, 133, 133, 0.75);
+  background-color: rgb(133, 133, 133);
   padding: 20px;
 }

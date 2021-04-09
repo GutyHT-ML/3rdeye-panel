@@ -1,14 +1,15 @@
 <div>
-  <mat-drawer-container class="example-container" autosize>
-    <mat-drawer #drawer class="example-sidenav" mode="side" [(opened)]="isToggled">
-      <mat-selection-list #routes [multiple]="false">
+  <mat-sidenav-container class="example-container" autosize>
+    <mat-sidenav #drawer class="example-sidenav" mode="side" [(opened)]="isToggled" 
+      [fixedInViewport]="true">
+      <mat-selection-list #routes [multiple]="false" (selectionChange)="drawer.toggle()">
         <mat-list-option *ngFor="let option of tabs" [value]="option.route"
-         routerLink="/{{option.route}}">
+         routerLink="./views/{{option.route}}" routerLinkActive="active">
           {{option.title}}
         </mat-list-option>
       </mat-selection-list>
-    </mat-drawer>
-    <div class="example-sidenav-content">
+    </mat-sidenav>
+    <mat-sidenav-content>
       <button type="button" mat-button (click)="drawer.toggle()">
         <span class="material-icons" *ngIf="!isToggled">
           arrow_forward_ios
@@ -17,19 +18,38 @@
           arrow_back_ios
         </span>
       </button>
-    </div>
-    <div>
-      <mat-card class="post-card">
-        <mat-card-title>Start a new discussion</mat-card-title>
-      </mat-card>
-      <mat-card class="post-card">
-        <mat-list>
-          <mat-list-item>
-            <p style="text-align: end;">This is the end of the feed!</p>
-          </mat-list-item>
-        </mat-list>
-      </mat-card>
-    </div>
-  
-  </mat-drawer-container>
+    </mat-sidenav-content>  
+  </mat-sidenav-container>
+  <div class="container">
+    <mat-card class="post-card">
+      <mat-card-title>Start a new discussion</mat-card-title>
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Add a title</mat-label>
+          <textarea matInput placeholder="Ex. My thoughts on pizza" formControlName="title"></textarea>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <mat-label>Add a description</mat-label>
+          <textarea #message maxlength="256" matInput placeholder="Ex. It makes me feel..." formControlName="description"></textarea>
+          <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+        </mat-form-field>
+        <button mat-raised-button color="accent" type="submit">Add post</button>
+      </form>
+    </mat-card>
+    <mat-card class="post-card">
+      <mat-list>
+        <div>
+          <div class="content">
+            <mat-list-item>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          </div>
+        </div>
+        <mat-list-item>
+          <p style="text-align: end;">This is the end of the feed!</p>
+        </mat-list-item>
+      </mat-list>
+    </mat-card>
+
+  </div>
 </div>

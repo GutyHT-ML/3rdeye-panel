@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class MainComponent implements OnInit {
   tabs = [
     {title: 'Perfil', route: 'profile'},
-    {title: 'Mis camaras', route: 'mycamera'},
+    {title: 'Mis camaras', route: 'cameras'},
   ]
 
   @Input()

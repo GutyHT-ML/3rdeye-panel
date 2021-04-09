@@ -4,10 +4,9 @@ import { MaterialModule } from 'src/app/shared/modules/material.module';
 import { MainRoutingModule } from './main-routing.module';
 import { MainComponent } from './pages/main/main.component';
 import { ReactiveFormsModule } from "@angular/forms";
-import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
-  declarations: [MainComponent, ProfileComponent],
+  declarations: [MainComponent],
   imports: [
     CommonModule,
     MainRoutingModule,
