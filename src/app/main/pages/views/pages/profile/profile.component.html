@@ -1,22 +1,18 @@
 <div class="container">
-  <form [formGroup]="profileForm" (ngSubmit)="logIn()" style="display: block;" autocomplete="off">
+  <form [formGroup]="profileForm" (ngSubmit)="edit()" style="display: block;" autocomplete="off">
     <div class="form-container">
-      <div class="mat-title" style="text-align: center;">Log In</div>
+      <div class="mat-title" style="text-align: center;">Edit profile</div>
         <mat-form-field appearance="outline" color="accent">
           <mat-label>Email</mat-label>
           <input matInput placeholder="Ex. guty@example.com" formControlName="email" required email>
           <mat-error *ngIf="profileForm.controls['email'].invalid"></mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" color="accent">
-          <mat-label>Enter your password</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required>
-          <mat-error *ngIf="profileForm.controls['password'].invalid"></mat-error>
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
+          <mat-label>Username</mat-label>
+          <input matInput placeholder="Ex. guty@example.com" formControlName="username" required>
+          <mat-error *ngIf="profileForm.controls['username'].invalid"></mat-error>
         </mat-form-field>
-        <button mat-raised-button color="accent" type="submit">Log In</button>
-        <p>Don't have an account? <a routerLink="/signup" routerLinkActive="active">Sign up</a></p>
+        <button mat-raised-button color="accent" type="submit">Edit Profile</button>
     </div>
   </form>
 </div>
