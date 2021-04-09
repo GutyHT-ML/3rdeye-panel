@@ -20,6 +20,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 const materialModules = [
   MatButtonModule,
@@ -42,7 +44,9 @@ const materialModules = [
   MatCardModule,
   MatSelectModule,
   MatCheckboxModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatProgressSpinnerModule,
+  MatGridListModule
 ];
 
 @NgModule({

@@ -4,8 +4,18 @@ import { CamerasComponent } from './pages/cameras/cameras.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
-  {path: 'profile', component: ProfileComponent},
-  {path: 'cameras', component: CamerasComponent}
+  {
+    path: 'profile', 
+    component: ProfileComponent,
+    children: [
+    ]
+  },
+  {
+    path: 'cameras', 
+    component: CamerasComponent, 
+    children: [
+    ]
+  }
 ];
 
 @NgModule({

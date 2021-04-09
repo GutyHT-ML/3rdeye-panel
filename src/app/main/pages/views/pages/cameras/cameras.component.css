@@ -1,0 +1,35 @@
+table {
+  width: 100%;
+}
+
+p {
+  font-size: x-small!important;
+}
+
+.container {
+  margin-bottom: 3em;
+}
+
+img:hover{
+  opacity: 0.2;
+}
+
+img {
+  cursor: pointer;
+}
+
+mat-progress-spinner {
+  margin:0 auto;
+}
+
+mat-card-content {
+  padding-top: 1em;
+}
+
+mat-card-header {
+  padding-bottom: 1em;
+}
+
+mat-button-toggle-group{
+  margin: 0 1em 0 auto;
+}

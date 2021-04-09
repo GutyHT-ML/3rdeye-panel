@@ -2,23 +2,27 @@
   <mat-sidenav-container class="example-container" autosize>
     <mat-sidenav #drawer class="example-sidenav" mode="side" [(opened)]="isToggled"
       [fixedInViewport]="true">
+      <mat-icon class="logo">visibility</mat-icon>
+      <p class="name">THIRD EYE</p>
       <mat-selection-list #routes [multiple]="false" (selectionChange)="drawer.toggle()">
         <mat-list-option *ngFor="let option of tabs" [value]="option.route"
-         routerLink="./views/{{option.route}}" routerLinkActive="active">
+         routerLink="{{option.route}}" routerLinkActive="active">
           {{option.title}}
         </mat-list-option>
       </mat-selection-list>
     </mat-sidenav>
     <mat-sidenav-content>
-      <button type="button" mat-button (click)="drawer.toggle()">
-        <span class="material-icons" *ngIf="!isToggled">
-          arrow_forward_ios
-        </span>
-        <span class="material-icons" *ngIf="isToggled">
-          arrow_back_ios
-        </span>
+      <button mat-icon-button color="primary" aria-label="Example icon button with a home icon"
+        (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <button mat-button color="primary"
+      (click)="logOut()">
+        <mat-icon>logout</mat-icon> Cerrar sesión
       </button>
     </mat-sidenav-content>
   </mat-sidenav-container>
-  <router-outlet></router-outlet>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
 </div>

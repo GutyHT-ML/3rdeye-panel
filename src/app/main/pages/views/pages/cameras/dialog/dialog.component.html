@@ -1,0 +1,19 @@
+<div mat-dialog-content>
+  <p>Añadir una nueva camara?</p>
+  <mat-form-field style="width: 100%;">
+    <mat-label>Codigo</mat-label>
+    <input matInput #message maxlength="256" placeholder="Ej. 12345" [(ngModel)]="data.code">
+    <mat-hint align="start"><strong>Algo que identifique tu camara</strong> </mat-hint>
+    <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+  </mat-form-field>
+  <mat-form-field style="width: 100%;">
+    <mat-label>Nombre</mat-label>
+    <input matInput #message maxlength="256" placeholder="Ej. Camara del patio" [(ngModel)]="data.name">
+    <mat-hint align="start"><strong>Algo que identifique tu camara</strong> </mat-hint>
+    <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="accent" (click)="onNoClick()">Cancelar</button>
+  <button mat-button color="primary" [mat-dialog-close]="data">Aceptar</button>
+</div>
