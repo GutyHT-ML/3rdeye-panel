@@ -1,37 +1,27 @@
 .container {
   padding: 3em;
 }
-.post-card {
-  max-width: 450px;
-  margin: auto;
-  border-style: solid;
-  border-color: rgb(210,218,75);
-  margin-bottom: 1em;
+
+mat-list-option {
+  border-bottom: 1px solid #E91E63;
 }
 
+.logo {
+  color: #E91E63;
+  font-size: 50px;
+  width: 100%;
+  text-align: center;
+}
 
-.mat-divider{
-  border-top-width: 3px;
-  border-top-color:rgb(210,218,75);
-  border-top-style: dashed;
+.name {
+  color: #E91E63;
+  font-size: 36px;
+  width: 100%;
+  text-align: center;
 }
 
 .content{
   margin-bottom: 35px;
-}
-
-.example-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
-}
-
-.example-full-width {
-  width: 100%;
-}
-
-.example-container {
-  background-color: rgba(133, 133, 133, 0.5);
 }
 
 .example-sidenav-content {
@@ -42,6 +32,6 @@
 }
 
 .example-sidenav {
-  background-color: rgb(133, 133, 133);
+  background-color: #323232;
   padding: 20px;
 }

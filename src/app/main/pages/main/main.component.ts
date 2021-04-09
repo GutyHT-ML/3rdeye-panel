@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-main',
@@ -8,8 +9,8 @@ import { Router } from '@angular/router';
 })
 export class MainComponent implements OnInit {
   tabs = [
-    {title: 'Perfil', route: 'profile'},
-    {title: 'Mis camaras', route: 'cameras'},
+    {title: 'Perfil', route: './views/profile'},
+    {title: 'Mis camaras y fotos', route: './views/cameras'},
   ]
 
   @Input()
@@ -19,9 +20,15 @@ export class MainComponent implements OnInit {
   route:String = ''
   showFiller = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+    private authSvc: AuthService) {
    }
   
   ngOnInit(): void {
+  }
+
+  logOut():void{
+    this.authSvc.onLogOut()
+    this.router.navigate(['/auth'])
   }
 }
