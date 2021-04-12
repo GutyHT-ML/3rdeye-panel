@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -22,6 +22,10 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatGridListModule} from '@angular/material/grid-list';
+
+import localeEs from '@angular/common/locales/es-MX';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeEs, 'es');
 
 const materialModules = [
   MatButtonModule,
@@ -53,5 +57,8 @@ const materialModules = [
   declarations: [],
   imports: [materialModules],
   exports: [materialModules],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'es' },
+  ]
 })
 export class MaterialModule {}

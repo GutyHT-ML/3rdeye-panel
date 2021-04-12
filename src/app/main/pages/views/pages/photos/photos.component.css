@@ -1,0 +1,40 @@
+#wrap {
+  height: 450px;
+    margin:auto;
+    overflow: hidden;
+    width: 800px;
+    border:red solid 5px;
+}
+#wrap iframe {
+  border: 0 solid;
+  height: 1200px;
+  margin-left: -110px;
+  margin-top: -385px;
+  width: 979px;
+  -webkit-transform:scale(0.8);
+  -moz-transform:scale(0.8);
+  -o-transform:scale(0.8);
+  -ms-transform:scale(0.8);
+}
+
+table {
+  width: 100%;
+  margin-bottom: 3em;
+}
+
+.mat-title{
+  color: #e91e63;
+  font-size: 35px;
+  text-align: center;
+}
+
+.mat-subtitle{
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  padding-bottom: 2em;
+}
+
+img{
+  padding-bottom: 2em;
+}

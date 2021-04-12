@@ -8,6 +8,7 @@ import { SharedModule } from 'src/app/shared/modules/shared.module';
 import { PhotosComponent } from './pages/photos/photos.component';
 import { DialogComponent } from './pages/cameras/dialog/dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from 'src/app/shared/modules/material.module';
 
 
 
@@ -17,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     ViewsRoutingModule,
     SharedModule,
+    MaterialModule,
     ReactiveFormsModule,
     FormsModule
   ]

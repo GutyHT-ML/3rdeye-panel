@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  API_URL: 'http://localhost:3333'
+  API_URL: 'http://192.168.252.182:3333',
+  WS_URL: 'ws://192.168.252.182:3333'
 };
 
 /*
