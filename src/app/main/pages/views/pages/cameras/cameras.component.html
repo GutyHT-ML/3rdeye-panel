@@ -1,75 +1,41 @@
-<mat-progress-spinner 
-  *ngIf="loading" 
-  color="primary" 
+<mat-progress-spinner
+  *ngIf="loading"
+  color="primary"
   mode="indeterminate">
 </mat-progress-spinner>
 <div class="container">
-  <table *ngIf="!loading" mat-table [dataSource]="userCams" class="mat-elevation-z8">
+  <table *ngIf="!loading" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
     <ng-container matColumnDef="code">
       <th mat-header-cell *matHeaderCellDef> Code </th>
       <td mat-cell *matCellDef="let element"> {{element?.code}} </td>
     </ng-container>
-  
+
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Name </th>
       <td mat-cell *matCellDef="let element"> {{element?.name}} </td>
     </ng-container>
-  
+
     <ng-container matColumnDef="created_at">
-      <th mat-header-cell *matHeaderCellDef> Dia de registro </th>
-      <td mat-cell *matCellDef="let element"> {{element?.created_at}} </td>
+      <th mat-header-cell *matHeaderCellDef> Fecha de registro </th>
+      <td mat-cell *matCellDef="let element"> {{element?.created_at | date:'medium'}} </td>
     </ng-container>
-  
-    <ng-containter matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef> Acciones </th>
-      <th mat-cell *matCellDef="let element">
-        <button mat-stroked-button color="primary" (click)="onObserveCamera(element.id)" >Observar</button>
-        <button mat-stroked-button color="accent" (click)="onEditCamera(element.id)">Editar</button>
-      </th>
-    </ng-containter>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef > Acciones </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-stroked-button color="primary" (click)="onObserveCamera(element.code)">Ver detalles</button>
+      </td>
+    </ng-container>
 
     <ng-container matColumnDef="disclaimer">
       <td mat-footer-cell *matFooterCellDef colspan="4" align="center">
         <button mat-raised-button color="primary" (click)="openDialog()"><mat-icon>add</mat-icon></button>
       </td>
     </ng-container>
-  
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     <tr mat-footer-row *matFooterRowDef="['disclaimer']" class="example-second-footer-row"></tr>
-  </table>  
+  </table>
 </div>
 
-<mat-card class="example-card" *ngIf="!loading">
-  <mat-card-header>
-    <mat-button-toggle-group appearance="legacy">
-      <mat-button-toggle color="primary" (click)="grid.cols = 4">
-        <mat-icon>looks_4</mat-icon>
-      </mat-button-toggle>
-      <mat-button-toggle (click)="grid.cols = 3">
-        <mat-icon>looks_3</mat-icon>
-      </mat-button-toggle>
-      <mat-button-toggle (click)="grid.cols = 2">
-        <mat-icon>looks_two</mat-icon>
-      </mat-button-toggle>
-    </mat-button-toggle-group>
-  </mat-card-header>
-  <mat-divider></mat-divider>
-  <mat-card-content>
-    <mat-grid-list #grid cols="3" rowHeight="2:1">
-      <mat-grid-tile *ngFor="let image of photos" (click)="onSelectPhoto(image)">
-        <mat-grid-tile-header>
-          <p>
-            {{image.route.split('/')[6]}}
-          </p>
-        </mat-grid-tile-header>
-        <img src={{image.route}}>
-        <mat-grid-tile-footer>
-          <p>
-            {{image.date_photo}}
-          </p>
-        </mat-grid-tile-footer>  
-      </mat-grid-tile>
-    </mat-grid-list>
-  </mat-card-content>
-</mat-card>

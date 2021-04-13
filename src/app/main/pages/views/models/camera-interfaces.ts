@@ -1,10 +1,25 @@
+import { Image } from "./photo-interfaces";
+
 export interface Camera {
-  id: Number,
-  code: String,
-  name: String,
-  user_id: String,
-  created_at: String,
-  updated_at: String
+  _id:        number,
+  code:       string,
+  name:       string,
+  ip:         string,
+  user_id:    number,
+  created_at: Date,
+  updated_at: Date,
+  images:     Image[]
+  values:     Value[]
+}
+
+export interface Value {
+  _id: number,
+  temperature: number,
+  humidity:    number,
+  date_value:  Date,
+  camera_id:   number,
+  created_at:  Date,
+  updated_at:  Date,
 }
 
 export interface StoreCameraRequest{

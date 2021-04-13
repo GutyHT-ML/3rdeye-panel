@@ -1,19 +1,21 @@
 <div mat-dialog-content>
-  <p>Añadir una nueva camara?</p>
-  <mat-form-field style="width: 100%;">
-    <mat-label>Codigo</mat-label>
-    <input matInput #message maxlength="256" placeholder="Ej. 12345" [(ngModel)]="data.code">
-    <mat-hint align="start"><strong>Algo que identifique tu camara</strong> </mat-hint>
-    <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
-  </mat-form-field>
-  <mat-form-field style="width: 100%;">
-    <mat-label>Nombre</mat-label>
-    <input matInput #message maxlength="256" placeholder="Ej. Camara del patio" [(ngModel)]="data.name">
-    <mat-hint align="start"><strong>Algo que identifique tu camara</strong> </mat-hint>
-    <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
-  </mat-form-field>
+  <form [formGroup]="form" (ngSubmit)="sendData()">
+    <p>Añadir una nueva camara</p>
+    <mat-form-field style="width: 100%;">
+      <mat-label>Código</mat-label>
+      <input matInput #message maxlength="256" placeholder="Ej. 12345" formControlName="code">
+      <mat-hint align="start"><strong>Ingresa el código de la cámara</strong> </mat-hint>
+      <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+    </mat-form-field>
+    <mat-form-field style="width: 100%;">
+      <mat-label>Nombre</mat-label>
+      <input matInput #message maxlength="256" placeholder="Ej. Camara del patio" formControlName="name">
+      <mat-hint align="start"><strong>Escribe un nombre para identificar a tu camara</strong> </mat-hint>
+      <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+    </mat-form-field>
+  </form>
 </div>
 <div mat-dialog-actions>
   <button mat-button color="accent" (click)="onNoClick()">Cancelar</button>
-  <button mat-button color="primary" [mat-dialog-close]="data">Aceptar</button>
+  <button mat-button color="primary" (click)="sendData()">Aceptar</button>
 </div>

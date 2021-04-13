@@ -24,10 +24,11 @@ export class AuthService {
         this.dataSvc.onSaveCookie('token', data.token.token);
         this.dataSvc.onSaveCookie('refreshToken', data.token.refreshToken);
         this.dataSvc.onSaveCookie('id', data.user.id);
+        this.dataSvc.onSaveCookie('username', data.user.username);
       })
     );
   }
-  
+
   onLogOut():void{
     this.dataSvc.onRemoveAllCookies()
   }
