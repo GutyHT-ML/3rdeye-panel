@@ -14,32 +14,26 @@ export class SignupComponent implements OnInit {
   hide = true
   constructor(private fb :FormBuilder,
     private router: Router,
-    private authSvc: AuthService) { this.buildForm }
+    private authSvc: AuthService) { this.buildForm() }
 
   ngOnInit(): void {
   }
   
   signUp():void{
     if (this.form.invalid) {
+      console.log('XD')
       return
     }
-    this.authSvc.onSignUp(this.form.value).subscribe(()=>{
-      this.router.navigate(['/panel'])
-    },(error: HttpErrorResponse)=>{
-      console.log(error)
-    })
+    this.authSvc.onSignUp(this.form.value).subscribe()
 
   }
 
   buildForm():void{
-    this.form = this.fb.group([
-      this.form = this.fb.group({
-        username: ['', [Validators.required]],
-        email: ['',[Validators.required, Validators.email]],
-        password: ['', Validators.required]
-      })
-  
-    ])
+    this.form = this.fb.group({
+      username: ['', [Validators.required]],
+      email: ['',[Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    })
   }
   
 }

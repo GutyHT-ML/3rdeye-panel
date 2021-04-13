@@ -11,10 +11,8 @@ import { DataService } from './data.service';
 export class AuthService {
 
   constructor(private http: HttpClient, private dataSvc: DataService) { }
-  onSignUp(signUpData: SignUpData):Observable<TokenResponse>{
-    this.http.post<SignUpResponse>(`${environment.API_URL}/v1/auth/signup`, signUpData)
-    const logInData: LoginData = {email: signUpData.email, password: signUpData.password }
-    return this.onLogIn(logInData)
+  onSignUp(signUpData: SignUpData):Observable<SignUpResponse>{
+    return this.http.post<SignUpResponse>(`${environment.API_URL}/v1/auth/signup`, signUpData)
   }
 
   onLogIn(data: LoginData): Observable<TokenResponse>{
