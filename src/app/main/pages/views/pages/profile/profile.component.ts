@@ -27,9 +27,6 @@ export class ProfileComponent implements OnInit {
   }
 
   edit(): void {
-    if (this.profileForm.invalid) {
-      return
-    }
     this.profileService.updateProfile(this.profileForm.value).subscribe(
       val => {
         console.log(val)

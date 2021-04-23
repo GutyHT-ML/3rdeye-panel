@@ -22,6 +22,6 @@ export interface SignUpData{
 
 export interface SignUpResponse{
   status: String,
-  message: String,
+  message: string,
   user: UserInterface
 }

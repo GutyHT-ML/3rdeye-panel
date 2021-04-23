@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { NotificationService } from 'src/app/main/pages/views/services/notification.service';
 
 @Component({
   selector: 'app-signup',
@@ -14,18 +15,27 @@ export class SignupComponent implements OnInit {
   hide = true
   constructor(private fb :FormBuilder,
     private router: Router,
-    private authSvc: AuthService) { this.buildForm() }
+    private authSvc: AuthService,
+    private notiSvc: NotificationService) { this.buildForm() }
 
   ngOnInit(): void {
   }
-  
+
   signUp():void{
     if (this.form.invalid) {
-      console.log('XD')
+      this.notiSvc.openSnackBar("Favor de rellenar los campos correctamente",2000)
       return
     }
-    this.authSvc.onSignUp(this.form.value).subscribe()
-
+    this.authSvc.onSignUp(this.form.value).subscribe(
+      val => {
+        this.notiSvc.openSnackBar(val.message,2000)
+        this.form.reset()
+        this.router.navigate(["/auth/login"])
+      },
+      error => {
+        this.notiSvc.openSnackBar("Error en el registro vuelva a intentar",2000)
+      }
+    )
   }
 
   buildForm():void{
@@ -35,5 +45,5 @@ export class SignupComponent implements OnInit {
       password: ['', Validators.required]
     })
   }
-  
+
 }
