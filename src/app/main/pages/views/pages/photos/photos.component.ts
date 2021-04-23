@@ -13,17 +13,17 @@ import { NotificationService } from '../../services/notification.service';
   styleUrls: ['./photos.component.css']
 })
 export class PhotosComponent implements OnInit {
-  code!: number;
+  code!: any;
   camera!: Camera;
   loading = true;
-  videoFeed = true;
+  videoFeed = false;
   url = `${environment.API_URL}/v1/api/repo/img/`;
   ip!: string;
   displayedColumns: string[] = ['temp', 'hum', 'date'];
   constructor(private route: ActivatedRoute, private cameraSvc: CameraService,
               private sanitizer: DomSanitizer, private wsSvc: WebSocketService,
               private notiSvc: NotificationService) {
-    this.code = Number(this.route.snapshot.paramMap.get('code'));
+    this.code = this.route.snapshot.paramMap.get('code');
    }
 
   ngOnInit(): void {
@@ -47,16 +47,16 @@ export class PhotosComponent implements OnInit {
 
   getCamera(code: Number): void{
     this.loading = true;
+    console.log(code);
     this.cameraSvc.onGetCamera(code).subscribe((data) =>{
       this.camera = data;
-      this.ip = `http://${this.camera.ip}:5000/video_feed`;
-      console.log(this.ip)
+      this.ip = `${this.camera?.ip}/video_feed`;
       this.loading = false;
-      /*this.cameraSvc.onGetVideoFeed(this.camera.ip).subscribe(() => {
+      this.cameraSvc.onGetVideoFeed(this.camera?.ip).subscribe(() => {
         this.videoFeed = true;
       }, () => {
         this.videoFeed = false;
-      });*/
+      });
     });
   }
 

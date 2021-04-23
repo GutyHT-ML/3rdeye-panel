@@ -4,7 +4,7 @@
 <div *ngIf="!videoFeed"class="mat-subtitle">No se ha podido establecer una conexión con la cámara</div>
 <div class="container">
   <div class="mat-title">Valores</div>
-  <table *ngIf="!loading" mat-table [dataSource]="camera.values" class="mat-elevation-z8">
+  <table *ngIf="!loading && camera" mat-table [dataSource]="camera.values" class="mat-elevation-z8">
     <ng-container matColumnDef="temp">
       <th mat-header-cell *matHeaderCellDef> Temperatura </th>
       <td mat-cell *matCellDef="let element"> {{element?.temperature}} </td>
@@ -42,7 +42,7 @@
   <mat-divider></mat-divider>
   <mat-card-content>
     <mat-grid-list #grid cols="3" rowHeight="1:1">
-      <mat-grid-tile *ngFor="let image of camera.images">
+      <mat-grid-tile *ngFor="let image of camera?.images">
         <img src="{{url}}{{image.route}}" style="width: 300px; height: 300px;">
         <mat-grid-tile-footer>
           <p>Distancia: {{image.distance}}</p>

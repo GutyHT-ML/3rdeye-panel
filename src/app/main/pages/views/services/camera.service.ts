@@ -27,6 +27,6 @@ export class CameraService {
   }
 
   onGetVideoFeed(url: string): Observable<any>{
-    return this.http.get<any>(`http://${url}:5000/video`);
+    return this.http.get<any>(`${url}/video`);
   }
 }
