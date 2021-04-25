@@ -9,6 +9,7 @@ import { PhotosComponent } from './pages/photos/photos.component';
 import { DialogComponent } from './pages/cameras/dialog/dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/shared/modules/material.module';
+import { ChartsModule } from 'ng2-charts';
 
 
 
@@ -20,7 +21,8 @@ import { MaterialModule } from 'src/app/shared/modules/material.module';
     SharedModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ChartsModule
   ]
 })
 export class ViewsModule { }

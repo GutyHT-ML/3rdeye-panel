@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
@@ -15,7 +17,14 @@ import { NotificationService } from '../../services/notification.service';
   styleUrls: ['./photos.component.css']
 })
 export class PhotosComponent implements OnInit {
+  dataSource!: MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   code!: any;
+  temperatures: number[] = [];
+  temperature: number= 0;
+  humiditys: number[] = [];
+  humidity: number= 0;
+  dates: Date[] = [];
   camera!: Camera;
   loading = true;
   videoFeed = false;
@@ -27,19 +36,17 @@ export class PhotosComponent implements OnInit {
               private notiSvc: NotificationService) {
     this.code = this.route.snapshot.paramMap.get('code');
    }
-
   public barChartOptions: ChartOptions = {
     responsive: true,
   };
-  public barChartLabels: Label[] = ['2015', '2016', '2017', '2018', '2019', '2020'];
-  public barChartType: ChartType = 'bar';
+  public barChartLabels: Label[] = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'];
+  public barChartType: ChartType = 'line';
   public barChartLegend = true;
   public barChartPlugins = [];
 
   public barChartData: ChartDataSets[] = [
-    { data: [65, 67, 70, 75, 80, 90], label: 'PHP' },
-    { data: [50, 48, 47, 49, 44, 40], label: '.Net' },
-    { data: [40, 30, 28, 25, 22, 20], label: 'Java' },
+    { data: this.temperatures, label: 'Temperature' },
+    { data: this.humiditys, label: 'Humidity' },
   ];
   ngOnInit(): void {
     this.getCamera(this.code);
@@ -59,7 +66,15 @@ export class PhotosComponent implements OnInit {
       this.notiSvc.openSnackBar(data, 3000).subscribe();
     })
   }
-
+  setData(): void{
+    this.dataSource = new MatTableDataSource();
+    this.dataSource.data = this.camera.values;
+    this.dataSource.paginator = this.paginator;
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   getCamera(code: Number): void{
     this.loading = true;
     console.log(code);
@@ -67,6 +82,18 @@ export class PhotosComponent implements OnInit {
       this.camera = data;
       this.ip = `${this.camera?.ip}/video_feed`;
       this.loading = false;
+      this.setData()
+      for (var value of this.camera.values){
+        if(value.temperature != this.temperature || value.humidity != this.humidity){
+          this.temperatures.push(value.temperature)
+          this.humiditys.push(value.humidity)
+          this.temperature = value.temperature
+          this.humidity = value.humidity
+        }
+        this.dates.push(value.date_value)
+      }
+      console.log(this.temperatures, "temperatura")
+      console.log(this.humiditys, "humedad")
       this.cameraSvc.onGetVideoFeed(this.camera?.ip).subscribe(() => {
         this.videoFeed = true;
       }, () => {

@@ -36,7 +36,6 @@ export class MainComponent implements OnInit {
     private cameraSvc: CameraService,
     private wsSvc: WebSocketService) {
    }
-
   ngOnInit(): void {
     this.getUserCameras();
   }
