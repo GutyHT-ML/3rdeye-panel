@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
 
   logIn() : void {
     if (this.form.invalid) {
+      this.notiSvc.openSnackBar("Favor de rellenar los campos",2000)
       return
     }
     this.authSvc.onLogIn(this.form.value).subscribe(()=>{

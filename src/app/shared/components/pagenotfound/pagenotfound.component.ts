@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DataService } from 'src/app/auth/services/data.service';
 
 @Component({
   selector: 'app-pagenotfound',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PagenotfoundComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dataSvc:DataService, private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  onClick(): void {
+    const token = this.dataSvc.onGetCookie('token')
+    if(token){
+      this.router.navigate(['/panel'])
+    } else {
+      this.router.navigate(['/auth'])
+    }
   }
 
 }

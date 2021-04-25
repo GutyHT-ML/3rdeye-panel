@@ -12,8 +12,9 @@ import {
 import { SharedModule } from "./shared/modules/shared.module";
 import { PagenotfoundComponent } from './shared/components/pagenotfound/pagenotfound.component';
 import { AuthInterceptor } from './auth/services/auth.interceptor';
+import { ChartsModule } from 'ng2-charts';
 @NgModule({
-  declarations: [			
+  declarations: [
     AppComponent, PagenotfoundComponent,
   ],
   imports: [
@@ -22,7 +23,8 @@ import { AuthInterceptor } from './auth/services/auth.interceptor';
     BrowserAnimationsModule,
     SharedModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ChartsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
