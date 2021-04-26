@@ -33,3 +33,10 @@ mat-card-header {
 mat-button-toggle-group{
   margin: 0 1em 0 auto;
 }
+
+.mat-title{
+  color: #e91e63;
+  font-size: 35px;
+  text-align: center;
+  padding-top: 0.5em;
+}

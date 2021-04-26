@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { WebSocketService } from 'src/app/auth/services/websocket.service';
@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 import { Camera } from '../../models/camera-interfaces';
 import { CameraService } from '../../services/camera.service';
 import { NotificationService } from '../../services/notification.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-photos',
@@ -24,7 +25,7 @@ export class PhotosComponent implements OnInit {
   temperature: number= 0;
   humiditys: number[] = [];
   humidity: number= 0;
-  dates: Date[] = [];
+  dates: string[] = [];
   camera!: Camera;
   loading = true;
   videoFeed = false;
@@ -33,21 +34,35 @@ export class PhotosComponent implements OnInit {
   displayedColumns: string[] = ['temp', 'hum', 'date'];
   constructor(private route: ActivatedRoute, private cameraSvc: CameraService,
               private sanitizer: DomSanitizer, private wsSvc: WebSocketService,
-              private notiSvc: NotificationService) {
+              private notiSvc: NotificationService, private router: Router) {
     this.code = this.route.snapshot.paramMap.get('code');
    }
   public barChartOptions: ChartOptions = {
     responsive: true,
+    legend: {
+      display: true,
+      labels: {
+        fontColor: '#FFFFFF'
+      }
+    },
+    scales: {
+      xAxes: [{
+          gridLines: {
+              display: false,
+          },
+          ticks: {
+            fontColor: "#FFFFFF",
+          },
+      }]
+    }
   };
-  public barChartLabels: Label[] = ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'];
+  public barChartLabels: Label[] = [];
   public barChartType: ChartType = 'line';
   public barChartLegend = true;
   public barChartPlugins = [];
 
-  public barChartData: ChartDataSets[] = [
-    { data: this.temperatures, label: 'Temperature' },
-    { data: this.humiditys, label: 'Humidity' },
-  ];
+  public barChartData: ChartDataSets[] = [];
+
   ngOnInit(): void {
     this.getCamera(this.code);
     const images = this.wsSvc.subscribeImages();
@@ -66,6 +81,11 @@ export class PhotosComponent implements OnInit {
       this.notiSvc.openSnackBar(data, 3000).subscribe();
     })
   }
+
+  ngAfterViewInit() {
+    this.getCamera(this.code);
+  }
+
   setData(): void{
     this.dataSource = new MatTableDataSource();
     this.dataSource.data = this.camera.values;
@@ -77,28 +97,37 @@ export class PhotosComponent implements OnInit {
   }
   getCamera(code: Number): void{
     this.loading = true;
-    console.log(code);
     this.cameraSvc.onGetCamera(code).subscribe((data) =>{
       this.camera = data;
+      console.log(this.camera);
+      if(!this.camera){
+        this.notiSvc.openSnackBar("Invalid camera code", 3000).subscribe();
+        this.router.navigate(["/panel/views/my_cameras"])
+      }
       this.ip = `${this.camera?.ip}/video_feed`;
       this.loading = false;
       this.setData()
+      this.temperatures = [];
+      this.humiditys = [];
+      this.dates = [];
       for (var value of this.camera.values){
-        if(value.temperature != this.temperature || value.humidity != this.humidity){
-          this.temperatures.push(value.temperature)
-          this.humiditys.push(value.humidity)
-          this.temperature = value.temperature
-          this.humidity = value.humidity
-        }
-        this.dates.push(value.date_value)
+        this.temperatures.push(value.temperature)
+        this.humiditys.push(value.humidity)
+        this.dates.push(moment(value.date_value).format("DD/MM/YY hh:mm:ss"),)
       }
-      console.log(this.temperatures, "temperatura")
-      console.log(this.humiditys, "humedad")
+      this.barChartData = [
+        { data: this.temperatures, label: 'Temperature' },
+        { data: this.humiditys, label: 'Humidity' },
+      ];
+      this.barChartLabels = this.dates;
       this.cameraSvc.onGetVideoFeed(this.camera?.ip).subscribe(() => {
         this.videoFeed = true;
       }, () => {
         this.videoFeed = false;
       });
+    }, error => {
+      this.notiSvc.openSnackBar("Invalid camera code", 3000).subscribe();
+      this.router.navigate(["/panel/views/my_cameras"])
     });
   }
 

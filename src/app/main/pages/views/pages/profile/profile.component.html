@@ -1,7 +1,11 @@
+<div class="mat-title">My profile</div>
+<p>Email: {{profile?.email}}</p>
+<p>Username: {{profile?.username}}</p>
+<p>Registration date: {{profile?.created_at | date:"medium" }}</p>
 <div class="container">
   <form [formGroup]="profileForm" (ngSubmit)="edit()" style="display: block;" autocomplete="off">
     <div class="form-container">
-      <div class="mat-title" style="text-align: center;">Edit profile</div>
+      <div class="mat-title">Edit profile</div>
         <mat-form-field appearance="outline" color="accent">
           <mat-label>Email</mat-label>
           <input matInput placeholder="Ex. guty@example.com" formControlName="email" email>
@@ -12,7 +16,7 @@
           <input matInput placeholder="Ex. guty@example.com" formControlName="username">
           <mat-error *ngIf="profileForm.controls['username'].invalid"></mat-error>
         </mat-form-field>
-        <button mat-raised-button color="accent" type="submit">Edit Profile</button>
+        <button mat-raised-button color="accent" type="submit" [disabled]="profileForm.invalid">Save changes</button>
     </div>
   </form>
 </div>

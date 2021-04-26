@@ -53,16 +53,17 @@
 }
 
 .mat-title{
-  color: #E91E63;
-  font-size: 3em;
-  margin-top: 2em;
-  margin-bottom: 1em;
+  color: #e91e63;
+  font-size: 35px;
+  text-align: center;
+  padding-top: 0.5em;
 }
 
 p{
   margin-top: 1.5em;
   text-align: center;
   color: white;
+  font-size: 20px;
 }
 
 a{

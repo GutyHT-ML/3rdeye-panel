@@ -17,7 +17,7 @@ export class PagenotfoundComponent implements OnInit {
   onClick(): void {
     const token = this.dataSvc.onGetCookie('token')
     if(token){
-      this.router.navigate(['/panel'])
+      this.router.navigate(['/panel/views/my_cameras'])
     } else {
       this.router.navigate(['/auth'])
     }

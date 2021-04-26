@@ -23,7 +23,7 @@ export class SignupComponent implements OnInit {
 
   signUp():void{
     if (this.form.invalid) {
-      this.notiSvc.openSnackBar("Favor de rellenar los campos correctamente",2000)
+      this.notiSvc.openSnackBar("Some fields are invalid",2000)
       return
     }
     this.authSvc.onSignUp(this.form.value).subscribe(
@@ -33,7 +33,7 @@ export class SignupComponent implements OnInit {
         this.router.navigate(["/auth/login"])
       },
       error => {
-        this.notiSvc.openSnackBar("Error en el registro vuelva a intentar",2000)
+        this.notiSvc.openSnackBar("Error signing up, please try again",2000)
       }
     )
   }

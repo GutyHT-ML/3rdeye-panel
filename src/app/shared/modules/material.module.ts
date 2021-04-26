@@ -58,7 +58,7 @@ const materialModules = [
   imports: [materialModules],
   exports: [materialModules],
   providers: [
-    { provide: LOCALE_ID, useValue: 'es' },
+    // { provide: LOCALE_ID, useValue: 'es' },
   ]
 })
 export class MaterialModule {}

@@ -7,6 +7,7 @@ import Ws from '@adonisjs/websocket-client';
 import { NotificationService } from '../views/services/notification.service';
 import { DataService } from 'src/app/auth/services/data.service';
 import { WebSocketService } from 'src/app/auth/services/websocket.service';
+import { ProfileService } from '../views/services/profile.service';
 
 @Component({
   selector: 'app-main',
@@ -15,14 +16,15 @@ import { WebSocketService } from 'src/app/auth/services/websocket.service';
 })
 export class MainComponent implements OnInit {
   tabs = [
-    {title: 'Perfil', route: './views/profile'},
-    {title: 'Mis camaras y fotos', route: './views/my_cameras'},
+    {title: 'Profile', route: './views/profile'},
+    {title: 'My cameras', route: './views/my_cameras'},
   ]
   userCams: Camera[] = [];
   ws!: any;
   chat!: any;
   messages: string[] = [];
   msg!: string;
+  username: string = "Username";
 
   @Input()
   isToggled !: boolean
@@ -34,9 +36,18 @@ export class MainComponent implements OnInit {
   constructor(private router: Router,
     private authSvc: AuthService,
     private cameraSvc: CameraService,
-    private wsSvc: WebSocketService) {
+    private wsSvc: WebSocketService,
+    private profileService: ProfileService) {
    }
   ngOnInit(): void {
+    this.profileService.getProfile().subscribe(
+      val => {
+        this.username = val.username;
+      },
+      error => {
+        console.log(error);
+      }
+    );
     this.getUserCameras();
   }
 

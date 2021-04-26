@@ -35,3 +35,11 @@ mat-list-option {
   background-color: #323232;
   padding: 20px;
 }
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.parent {
+  display: flex;
+}
