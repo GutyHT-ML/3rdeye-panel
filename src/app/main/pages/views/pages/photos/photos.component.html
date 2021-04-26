@@ -3,6 +3,42 @@
 <img *ngIf="videoFeed" [src]='getIP()' height="100%" width="100%">
 <div *ngIf="!videoFeed"class="mat-subtitle">No se ha podido establecer una conexión con la cámara</div>
 
+
+<!--IMAGENES-->
+<div class="mat-title">Imágenes</div>
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-button-toggle-group appearance="legacy">
+      <mat-button-toggle color="primary" (click)="grid.cols = 4">
+        <mat-icon>looks_4</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle (click)="grid.cols = 3">
+        <mat-icon>looks_3</mat-icon>
+      </mat-button-toggle>
+      <mat-button-toggle (click)="grid.cols = 2">
+        <mat-icon>looks_two</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <mat-grid-list #grid cols="3" rowHeight="1:1">
+      <mat-grid-tile *ngFor="let image of camera?.images">
+        <img src="{{url}}{{image.route}}" style="width: 300px; height: 300px;">
+        <mat-grid-tile-footer>
+          <p>Distancia: {{image.distance}}</p>
+          <p>{{image.obj_type}}</p>
+          <p>{{image.date_photo | date:'medium'}}</p>
+        </mat-grid-tile-footer>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>
+
+
+<!--GRAFICA-->
+
+<div class="mat-title">Gráfica</div>
 <div style="display: block;" >
   <canvas baseChart
     [datasets]="barChartData"
@@ -37,36 +73,4 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
   <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-</div>
-
-<!--IMAGENES-->
-<div class="mat-title">Imágenes</div>
-<mat-card class="example-card">
-  <mat-card-header>
-    <mat-button-toggle-group appearance="legacy">
-      <mat-button-toggle color="primary" (click)="grid.cols = 4">
-        <mat-icon>looks_4</mat-icon>
-      </mat-button-toggle>
-      <mat-button-toggle (click)="grid.cols = 3">
-        <mat-icon>looks_3</mat-icon>
-      </mat-button-toggle>
-      <mat-button-toggle (click)="grid.cols = 2">
-        <mat-icon>looks_two</mat-icon>
-      </mat-button-toggle>
-    </mat-button-toggle-group>
-  </mat-card-header>
-  <mat-divider></mat-divider>
-  <mat-card-content>
-    <mat-grid-list #grid cols="3" rowHeight="1:1">
-      <mat-grid-tile *ngFor="let image of camera?.images">
-        <img src="{{url}}{{image.route}}" style="width: 300px; height: 300px;">
-        <mat-grid-tile-footer>
-          <p>Distancia: {{image.distance}}</p>
-          <p>{{image.obj_type}}</p>
-          <p>{{image.date_photo | date:'medium'}}</p>
-        </mat-grid-tile-footer>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </mat-card-content>
-</mat-card>
 </div>

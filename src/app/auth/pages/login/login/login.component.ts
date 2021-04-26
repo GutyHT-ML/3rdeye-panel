@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       return
     }
     this.authSvc.onLogIn(this.form.value).subscribe(()=>{
-      this.router.navigate(['/panel'])
+      this.router.navigate(['panel/views/my_cameras'])
     },(error: HttpErrorResponse)=>{
       if (error.status == 403){
         this.notiSvc.openSnackBar("Incorrect email or password",2000)
